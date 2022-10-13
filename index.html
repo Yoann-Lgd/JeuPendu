@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+    <title>Jeu du pendu</title>
+</head>
+
+<body>
+<div id="grid">
+
+    <h1 id="titre">Jeu du pendu</h1>
+    <p id="consigne">Devine le mot caché en cliquant sur les lettres</p>
+
+
+
+<div class="jeu-contenant" id="jeu-contenant">
+    <svg height="250" width="200" class="visuel-pendu">
+
+        <!--Portant-->
+        <line x1="60" y1="20" x2="140" y2="20" />
+        <line x1="140" y1="20" x2="140" y2="50" />
+        <line x1="60" y1="20" x2="60" y2="230" />
+        <line x1="20" y1="230" x2="100" y2="230" />
+
+        <!--Bonhomme-->
+        <!--Tête-->
+        <circle cx="140" cy="70" r="20" class="figure-partie" />
+
+        <!--Corps-->
+        <line x1="140" y1="90" x2="140" y2="150" class="figure-partie" />
+
+        <!--Bras-->
+        <line x1="140" y1="120" x2="120" y2="100" class="figure-partie" />
+        <line x1="140" y1="120" x2="160" y2="100" class="figure-partie" />
+
+        <!--Jambe-->
+        <line x1="140" y1="150" x2="120" y2="180" class="figure-partie" />
+        <line x1="140" y1="150" x2="160" y2="180" class="figure-partie" />
+
+    </svg>
+</div>
+
+<div class="mot" id="mot"></div>
+<div id="boutons"></div>
+</div>
+<!--Contenant message final-->
+<div class="popup-contenant" id="popup-contenant">
+    <div class="popup">
+        <h2 id="message-final">Text </h2>
+        <button id="bouton-jouer">Rejouer</button>
+    </div>
+</div>
+
+</body>
+</html>
