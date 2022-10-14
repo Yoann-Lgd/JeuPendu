@@ -1,4 +1,4 @@
-const mots = ['fff', 'test', 'ooo'];
+const mots = ['pendu', 'table', 'alphabet', 'herbe', 'califourchon', 'brevet', 'sud'];
 let motATrouver = selectionnerUnMot();
 let lettreTrouvee = 0;
 let mauvaiseLettre = 0;
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 function selectionnerUnMot(){
-    return mots[Math.floor(Math.random() * mots.length)];
+    return mots[Math.floor(Math.random() * mots.length)].toUpperCase();
 }
 
 
@@ -30,12 +30,24 @@ function genererDesBouttons(){
     let boutons = document.getElementById("boutons");
     for(let i=0; i < 26; i++){
         let button = document.createElement("button");
-        let lettre = String.fromCharCode(i + 65).toLowerCase();
+        let lettre = String.fromCharCode(i + 65).toUpperCase();
         button.appendChild(document.createTextNode(lettre.toUpperCase()));
         button.setAttribute("id", lettre);
-        button.onclick = function(){verificationLettre(button.id)};
+        button.onclick = function(){verificationLettre(button.id) ; desactiverUnBouton(button.id)};
         boutons.appendChild(button);
     }
+}
+
+function desactiverUnBouton(btnId) {
+    document.getElementById(btnId).disabled = true;
+    document.getElementById(btnId).style.backgroundColor = 'grey';
+}
+function reinitialiserLesBoutons(){
+    const button = document.querySelectorAll("button");
+    button.forEach( bouton => {
+        bouton.disabled = false;
+        bouton.style.backgroundColor = '#eae2c7';
+    });
 }
 
 function verificationLettre(lettre){
@@ -77,16 +89,22 @@ function verificationLettre(lettre){
         })
     }
 
-    function rejouer(){
+    function effacerLeMot(){
         let mot = document.getElementById("mot");
+        mot.innerHTML ="";
+    }
+
+    function rejouer(){
         const popup = document.getElementById("popup-contenant");
         let rejouerBtn= document.getElementById("bouton-jouer");
         rejouerBtn.addEventListener('click', () =>{
             lettreTrouvee = 0;
             mauvaiseLettre = 0;
             motATrouver = selectionnerUnMot();
+            effacerLeMot();
             afficherMot();
             afficherBonhomme();
+            reinitialiserLesBoutons();
             popup.style.display = 'none';
         })
     }

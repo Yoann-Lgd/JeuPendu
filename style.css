@@ -1,47 +1,7 @@
 /*
 font-family: 'Roboto Condensed', sans-serif;
 font-family: 'Shadows Into Light', cursive;
-
-Associer les classes et IDs à la grid-area
 */
-#titre {grid-area: titre;}
-#consigne {grid-area: consigne;}
-#jeu-contenant{grid-area: jeu-contenant;}
-#mot{grid-area: mot;}
-#boutons{grid-area: boutons;}
-#consigne{grid-area: consigne;}
-
-#grid {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr 1fr; /* Nombre et longueurs des colonnes */
-    grid-template-rows: 0.5fr 1fr 1fr; /* Nombre et longueurs des lignes */
-    grid-template-areas: /* Placement des divs dans le tableau */
-            "titre titre"
-            "consigne consigne"
-        "jeu-contenant mot"
-        "boutons boutons";
-    text-align: center;
-    align-items: center;
-}
-
-@media only screen and (max-height: 1000px) and (max-width: 800px) {
-    #grid {
-        display: grid;
-        height: 50vh;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 0.1fr 1fr 1fr 1fr;
-        grid-template-areas:
-      "consigne consigne"
-      "jeu-contenant"
-      "mot"
-      "boutons"
-    }
-    #titre{
-        font-size: 23px;
-    }
-}
-
 
 body{
     font-family: 'Roboto Condensed', sans-serif;
@@ -60,27 +20,28 @@ h1{
     text-shadow: 2px 2px 2px #D9D4D2;
 }
 
+.mot{
+    letter-spacing: 8px;
+}
+
 /*style boutons*/
 #boutons{
-    padding: 20px;
+
     text-align: center;
 }
 
 #boutons button{
     width: 7.5vh;
     height: 7vh;
-    margin: 2px;
+    margin: 1px;
     background-color: #eae2c7;
     border-color: #6a6253;
-    font-size: 20px;
+    font-size: 18px;
     color: #232020;
     cursor: pointer;
 }
 
 #boutons button:hover {
-    width: 7.5vh;
-    height: 7vh;
-    margin: 2px;
     background-color: #fafafa;
     border-color: floralwhite;
     color: #203440;
@@ -137,4 +98,86 @@ h1{
 
 .popup button:focus{
     outline: 0;
+}
+
+/*
+Associer les classes et IDs à la grid-area
+*/
+#titre {grid-area: titre;}
+#consigne {grid-area: consigne;}
+.visuel-pendu{grid-area: visuel-pendu;}
+#mot{grid-area: mot;}
+#boutons{grid-area: boutons;}
+#consigne{grid-area: consigne;}
+
+#grid {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr; /* Nombre et longueurs des colonnes */
+    grid-template-rows: 0.5fr 0.5fr 1fr 1fr; /* Nombre et longueurs des lignes */
+    grid-template-areas: /* Placement des divs dans le tableau */
+            "titre titre"
+            "consigne consigne"
+        "visuel-pendu mot"
+        "boutons boutons";
+    text-align: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1000px) {
+    #grid {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 1fr 1fr 1fr;
+        grid-template-areas:
+      "titre"
+      "visuel-pendu"
+      "mot"
+      "boutons";
+        text-align: center;
+        align-items: center;
+    }
+    #titre{
+        font-size: 23px;
+    }
+    .jeu-contenant{
+        height: 250px;
+    }
+    #consigne{
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 600px) and (max-height: 900px){
+    #grid {
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr ;
+        grid-template-areas:
+      "titre titre"
+      "visuel-pendu mot"
+      "boutons boutons";
+        text-align: center;
+        align-items: center;
+    }
+
+    #boutons button{
+        width: 10vh;
+        height: 10vh;
+        margin: 1px;
+    }
+    #titre{
+        font-size: 23px;
+    }
+    #consigne{
+        display: none;
+    }
+    .jeu-contenant{
+        height: 100px;
+    }
+    #titre{
+        display: none;
+    }
 }
