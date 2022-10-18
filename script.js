@@ -5,16 +5,19 @@ let mauvaiseLettre = 0;
 
 
 document.addEventListener('DOMContentLoaded', function(){
+    jouer()
+});
+
+
+function jouer(){
     genererDesBouttons();
     afficherMot();
     rejouer();
-});
-
+}
 
 function selectionnerUnMot(){
     return mots[Math.floor(Math.random() * mots.length)].toUpperCase();
 }
-
 
 function afficherMot(){
     let mot = document.getElementById("mot");
@@ -102,9 +105,9 @@ function verificationLettre(lettre){
             mauvaiseLettre = 0;
             motATrouver = selectionnerUnMot();
             effacerLeMot();
+            reinitialiserLesBoutons();
             afficherMot();
             afficherBonhomme();
-            reinitialiserLesBoutons();
             popup.style.display = 'none';
         })
     }
