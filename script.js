@@ -1,11 +1,11 @@
 const mots = ['pendu', 'table', 'alphabet', 'herbe', 'califourchon', 'brevet', 'sud'];
-let motATrouver = selectionnerUnMot();
+let motATrouver;
 let lettreTrouvee = 0;
 let mauvaiseLettre = 0;
 
 
 document.addEventListener('DOMContentLoaded', function(){
-    jouer()
+    chargerUnMot();
 });
 
 
@@ -15,9 +15,25 @@ function jouer(){
     rejouer();
 }
 
-function selectionnerUnMot(){
-    return mots[Math.floor(Math.random() * mots.length)].toUpperCase();
+function chargerUnMot(){
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET" , "https://random-word-api.herokuapp.com/word", true);
+    xhr.onload = (e) => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                motATrouver = JSON.parse(xhr.responseText).find(x=>x!==undefined).toUpperCase();
+                jouer();
+            } else {
+                console.error(xhr.statusText);
+            }
+        }
+    };
+    xhr.onerror = (e) => {
+        console.error(xhr.statusText);
+    };
+    xhr.send(null);
 }
+
 
 function afficherMot(){
     let mot = document.getElementById("mot");
@@ -72,44 +88,43 @@ function verificationLettre(lettre){
     }
 
     if (lettreTrouvee === motATrouver.length){
-        messageFinal.innerHTML = "Felicitation tu as trouvé le mot qui était : " + motATrouver;
+        messageFinal.innerHTML = "Congratulations, you found the word that was : " + motATrouver;
         popup.style.display = 'flex';
     } else if(mauvaiseLettre === figurePartie.length){
-        messageFinal.innerHTML = "Tu n'es pas parvenu à trouver le mot qui était : " + motATrouver;
+        messageFinal.innerHTML = "You didn't manage to find the word that was : " + motATrouver;
         popup.style.display = 'flex';
     }
 
 }
 
-    function afficherBonhomme() {
-        const figurePartie = document.querySelectorAll('.figure-partie');
-        figurePartie.forEach((partie, index) => {
-            if (index < mauvaiseLettre) {
-                partie.style.display = 'block';
-            } else {
-                partie.style.display = 'none';
-            }
-        })
-    }
+function afficherBonhomme() {
+    const figurePartie = document.querySelectorAll('.figure-partie');
+    figurePartie.forEach((partie, index) => {
+        if (index < mauvaiseLettre) {
+            partie.style.display = 'block';
+        } else {
+            partie.style.display = 'none';
+        }
+    })
+}
 
-    function effacerLeMot(){
-        let mot = document.getElementById("mot");
-        mot.innerHTML ="";
-    }
+function effacerLeMot(){
+    let mot = document.getElementById("mot");
+    mot.innerHTML ="";
+}
 
-    function rejouer(){
-        const popup = document.getElementById("popup-contenant");
-        let rejouerBtn= document.getElementById("bouton-jouer");
-        rejouerBtn.addEventListener('click', () =>{
-            lettreTrouvee = 0;
-            mauvaiseLettre = 0;
-            motATrouver = selectionnerUnMot();
-            effacerLeMot();
-            reinitialiserLesBoutons();
-            afficherMot();
-            afficherBonhomme();
-            popup.style.display = 'none';
-        })
-    }
+function rejouer(){
+    const popup = document.getElementById("popup-contenant");
+    let rejouerBtn= document.getElementById("bouton-jouer");
+    rejouerBtn.addEventListener('click', () =>{
+        lettreTrouvee = 0;
+        mauvaiseLettre = 0;
+        effacerLeMot();
+        reinitialiserLesBoutons();
+        afficherMot();
+        afficherBonhomme();
+        popup.style.display = 'none';
+    })
+}
 
 
